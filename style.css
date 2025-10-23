@@ -59,28 +59,51 @@ p, a, span {
     border-radius: 10px;
     overflow: hidden;
 }
-
 .profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 1rem ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 1rem;
 }
 
 .profile-img {
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
+  position: relative;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  box-shadow: 0 0 30px 20px rgba(7,12,20,0.5);
 }
 
 .profile-img .image {
-    height: 100%;
-    width: 100%;
-    border-radius: 50%;
-    background-position: center;
-    background-size: cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  z-index: 2; /* above the before gradient */
 }
+
+
+.profile-img::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #00e0ff, #0A66C2, #E1306C, #FF4500);
+  z-index: 1;
+  animation: rotateBorder 4s linear infinite;
+}
+
+@keyframes rotateBorder {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 
 .profile-discription {
     width: 80%;
@@ -90,6 +113,15 @@ p, a, span {
 .profile-discription h1 {
     overflow: hidden;
     margin-top: 1rem;
+}
+
+@keyframes colorTransition {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 .profile-discription span {
@@ -147,6 +179,8 @@ p, a, span {
 
 .social-link i {
   font-size: 1.2rem;
+  animation: floatRain 4s ease-in-out infinite;
+
 }
 
 .social-link a{
@@ -154,18 +188,109 @@ p, a, span {
 }
 .social-link:hover {
   background: rgba(0, 224, 255, 0.12);
-  transform: translateY(0,-3px) scale(1.01);
   box-shadow: 5px 10px 10px rgba(7,12,20,0.5);
 }
 
-/* Individual color accents (optional) */
-.social-link.instagram i { color: #E1306C; }
-.social-link.twitter i { color: #1DA1F2; }
-.social-link.threads i { color: #fff; }
-.social-link.reddit i { color: #FF4500; }
-.social-link.linkedin i { color: #0A66C2; }
-.social-link.email i { color: #EA4335; }
-.social-link.portfolio i { color: #00e0ff; }
+.social-link.portfolio i,
+#particle-portfolio  {
+  color: #00e0ff;
+}
+
+.social-link.instagram i,
+#particle-instagram  {
+  color: #E1306C;
+}
+
+.social-link.twitter i,
+#particle-twitter  {
+  color: #1DA1F2;
+}
+
+.social-link.threads i,
+#particle-threads  {
+  color: #ffffff;
+}
+
+.social-link.reddit i,
+#particle-reddit  {
+  color: #FF4500;
+}
+
+.social-link.linkedin i,
+#particle-linkedin {
+  color: #0A66C2;
+}
+
+.social-link.email i,
+#particle-email {
+  color: #EA4335;
+}
+
+@keyframes floatRain {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-3px) translateX(3px);
+  }
+  50% {
+    transform: translateY(3px) translateX(-3px);
+  }
+  75% {
+    transform: translateY(-3px) translateX(3px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+.social-link.portfolio i { animation-delay: 0s; }
+.social-link.instagram i{ animation-delay: 0.5s; }
+.social-link.twitter i{ animation-delay: 1s; }
+.social-link.threads i{ animation-delay: 1.5s; }
+.social-link.reddit i { animation-delay: 2s; }
+.social-link.linkedin i{ animation-delay: 2.5s; }
+.social-link.email i { animation-delay: 3s; }
+
+/* upcoming feature */
+.social-icons {
+  position: absolute;
+  display: none;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.social-icons i {
+  font-size: .8rem;
+  position: absolute;
+  opacity: 0.8;
+  animation: particleAnim 12s linear 1 both;
+  z-index: 12;
+}
+
+@keyframes particleAnim {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(20%) translateX(10px);
+  }
+  50% {
+    transform: translateY(40%) translateX(-3px);
+  }
+  75% {
+    transform: translateY(60%) translateX(3px);
+  }
+  100% {
+    transform: translateY(100%) translateX(0);
+  }
+}
+
+/* ___________ */
 
 .social-link:nth-child(1) {
   animation-delay: 0s;
@@ -189,9 +314,7 @@ p, a, span {
   animation-delay: 1.8s;
 }
 
-.social-link:nth-child(1).hover {
-    transform: translate(0, -3px);
-}
+
 
 @keyframes sideShow {
     0% {
@@ -205,7 +328,7 @@ p, a, span {
 }
 
 #copy-right {
-    margin: 1.5rem 0 .5rem 0;
+    margin: 2rem 0 .5rem 0;
     font-size: .7rem;
 }
 
