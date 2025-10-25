@@ -126,10 +126,10 @@ p, a, span {
 .profile-img::before {
   content: "";
   position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
   border-radius: 50%;
   background: linear-gradient(45deg, #00e0ff, #0A66C2, #E1306C, #FF4500);
   z-index: 1;
